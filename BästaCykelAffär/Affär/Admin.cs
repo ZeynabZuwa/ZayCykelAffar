@@ -30,9 +30,10 @@ namespace BästaCykelAffär.Affär
                 foreach (Cykel c in cyklar)
                 {
 
-                    Console.WriteLine("Id: " + c.Cykel_id + "\nCykeltyp: " + c.Cykeltyp + "\nVäxlar: " + c.Färg + "\nDäckstorlek i tum: " + c.Däckstorlek_tum + "\nPris per dag: " + c.Pris);
-
+                    Console.WriteLine("Id: " + c.Cykel_id + "\nCykeltyp: " + c.Cykeltyp + "\nVäxlar: " + c.Färg + "\nDäckstorlek i tum: " + c.Däckstorlek_tum + "\nPris per dag: " + c.Pris );
+                    
                 }
+                
             }
         }
 
@@ -73,14 +74,27 @@ namespace BästaCykelAffär.Affär
         // en metod för att ta bort data, tar bort en kund
         public void TaBortEnKund(int Kund_id)
         {
-            using (var context = new CykelAffärContext())
+            try
             {
-                var tabort = new Kund(Kund_id);
+                using (var context = new CykelAffärContext())
+                {
+                    var tabort = new Kund(Kund_id);
 
-                context.Kunder.Remove(tabort);
 
-                context.SaveChanges();
+                    context.Kunder.Remove(tabort);
+
+                    context.SaveChanges();
+
+
+                }
             }
+            catch
+            {
+                Console.WriteLine("Du har valt ett id som inte finns, vänligen försök igen!");
+                Console.WriteLine("");
+            }
+
+          
 
         }
 
@@ -96,7 +110,10 @@ namespace BästaCykelAffär.Affär
                 {
 
                     Console.WriteLine("Cykel Id: " + b.Cykel_id + "\nCykeltyp: " + b.Cykeltyp + "\nVäxlar: " + b.Färg + "\nDäckstorlek i tum: " + b.Däckstorlek_tum + "\nPris per dag: " + b.Pris);
+                    Console.WriteLine("");  
                 }
+
+             
             }
 
 
